@@ -26,10 +26,13 @@ def criar_arquivo_csv(nome_arquivo: str) -> str:
         initialdir= "C:/Documents",
         title= "Selecione um diretório")
     with open(f"{diretorio}/{nome_arquivo}", "x", encoding = "UTF-8") as arquivo:
-        arquivo.write("Tarefa; Status")
+        arquivo.write("Tarefa;Status")
 
     return f"{diretorio}/{nome_arquivo}"
 
-def carregar_arquivo(caminho_arquivo: str):
+def carregar_arquivo(caminho_arquivo: str) -> pd.DataFrame:
     df = pd.read_csv(caminho_arquivo)
     return df
+
+def salvar_arquivo(caminho_arquivo: str, df: pd.DataFrame):
+    df.to_csv(caminho_arquivo, sep = ";", index = False)
