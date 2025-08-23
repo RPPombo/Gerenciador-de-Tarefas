@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import filedialog
-import pandas as pd
 from auxiliares import *
 
 def selecionar_arquivo(janela_principal: tk.Tk):
@@ -36,9 +35,3 @@ def criar_arquivo_csv(janela_principal:tk.Tk):
 
         janela_principal.caminho_arquivo = f"{diretorio}/{entrada_nome}.csv"
 
-def carregar_arquivo(caminho_arquivo: str) -> pd.DataFrame:
-    df = pd.read_csv(caminho_arquivo)
-    return df
-
-def salvar_arquivo(caminho_arquivo: str, df: pd.DataFrame):
-    df.to_csv(caminho_arquivo, sep = ";", index = False)
