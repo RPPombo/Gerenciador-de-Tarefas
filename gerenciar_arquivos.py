@@ -1,34 +1,40 @@
 import tkinter as tk
 from tkinter import filedialog
 import pandas as pd
+from auxiliares import *
 
-def selecionar_arquivo() -> str:
-    # Cria a janela principal "oculta"
-    janela = tk.Tk()
-    janela.withdraw()
-
-    # Abre o seletor de arquivos na pasta Documents
+def selecionar_arquivo(janela_principal: tk.Tk):
+    # Abre o seletor de arquivos usando a janela principal como parent
     caminho_arquivo = filedialog.askopenfilename(
-        initialdir="C:/Documents",  
+        parent=janela_principal,
+        initialdir="C:/Documents",
         title="Selecione um arquivo CSV",
         filetypes=(("Arquivos CSV", "*.csv"), ("Todos os arquivos", "*.*"))
     )
+    if caminho_arquivo:
+        janela_principal.caminho_arquivo = caminho_arquivo
 
-    return caminho_arquivo
 
-def criar_arquivo_csv(nome_arquivo: str) -> str:
-    # Cria a janela principal "oculta"
-    janela = tk.Tk()
-    janela.withdraw()
-
+def criar_arquivo_csv(janela_principal:tk.Tk):
     # Abre o seletor de diretório na pasta Documents
     diretorio = filedialog.askdirectory(
+        parent=janela_principal,
         initialdir= "C:/Documents",
         title= "Selecione um diretório")
-    with open(f"{diretorio}/{nome_arquivo}", "x", encoding = "UTF-8") as arquivo:
-        arquivo.write("Tarefa;Status")
 
-    return f"{diretorio}/{nome_arquivo}"
+    if diretorio:
+        janela = tk.Toplevel(janela_principal)
+        janela.title("Input do nome")
+        centralizar_janela(janela, 400, 200)
+
+        tk.Label(janela, text="Nome do arquivo:").pack(pady=(20, 5))
+        entrada_nome = tk.Entry(janela, width=25)
+        entrada_nome.pack(pady=(0, 10))
+
+        with open(f"{diretorio}/{entrada_nome}.csv", "x", encoding = "UTF-8") as arquivo:
+            arquivo.write("Tarefa;Status")
+
+        janela_principal.caminho_arquivo = f"{diretorio}/{entrada_nome}.csv"
 
 def carregar_arquivo(caminho_arquivo: str) -> pd.DataFrame:
     df = pd.read_csv(caminho_arquivo)
