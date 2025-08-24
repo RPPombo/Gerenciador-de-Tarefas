@@ -9,16 +9,31 @@ def janela_principal() -> tk.Tk:
     centralizar_janela(janela, 1400, 800)
 
     # Frames
-    frame_esquerda = tk.Frame(janela, bg="yellow", width=400)
-    frame_esquerda.grid(row=0, column=0, sticky="nsew")
+    frame_esquerda = tk.Frame(janela, bg="yellow", width=400, height=800)
+    frame_esquerda.grid(column=0, sticky="nsew")
 
     frame_direita = tk.Frame(janela, bg="green", width=1000)
-    frame_direita.grid(row=0, column=1, sticky="nsew")
+    frame_direita.grid(column=1, sticky="nsew")
 
-    frame_esquerda.grid_columnconfigure(0, minsize=400)
-    frame_direita.grid_columnconfigure(0, minsize=1000)
+    janela.grid_columnconfigure(0, minsize=400)
+    janela.grid_columnconfigure(1, minsize=1000)
 
-    # Scrollbar no frame direito
+    # Frame Esquerdo
+    tk.Label(frame_esquerda, text="Arquivos").pack(pady=10)
+
+    # Seleção de arquivo
+    tk.Button(frame_esquerda, text="Selecionar arquivo", command=lambda: selecionar_arquivo(janela)).pack(pady=10)
+
+    # Criação de arquivo
+    tk.Button(frame_esquerda, text="Criar arquivo", command=lambda: criar_arquivo_csv(janela)).pack(pady=10)
+    
+    tk.Label(frame_esquerda, text="Tarefas").pack(pady=10)
+
+    # Adição de tarefa
+    tk.Button(frame_esquerda, text="Adicionar Tarefa", command=lambda: adicionar_tarefa(janela)).pack(pady=10)
+    
+    # Frame Direito
+    # Scrollbar
     canvas = tk.Canvas(frame_direita)
     canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
@@ -34,13 +49,6 @@ def janela_principal() -> tk.Tk:
         canvas.configure(scrollregion=canvas.bbox("all"))
 
     frame_scroll.bind("<Configure>", ajustar_scroll)
-
-    # Seleção de arquivo
-    tk.Button(frame_esquerda, text="Selecionar arquivo", command=lambda: selecionar_arquivo(janela)).pack(pady=10)
-
-    # Criar arquivo
-    tk.Button(frame_esquerda, text="Criar arquivo",
-              command=lambda: criar_arquivo_csv(janela)).pack(pady=10)
 
     return janela
 

@@ -14,12 +14,13 @@ def selecionar_arquivo(janela_principal: tk.Tk):
         janela_principal.caminho_arquivo = caminho_arquivo
 
 
-def criar_arquivo_csv(janela_principal:tk.Tk):
+def criar_arquivo_csv(janela_principal: tk.Tk):
     # Abre o seletor de diretório na pasta Documents
     diretorio = filedialog.askdirectory(
         parent=janela_principal,
-        initialdir= "C:/Documents",
-        title= "Selecione um diretório")
+        initialdir="C:/Documents",
+        title="Selecione um diretório"
+    )
 
     if diretorio:
         janela = tk.Toplevel(janela_principal)
@@ -30,8 +31,19 @@ def criar_arquivo_csv(janela_principal:tk.Tk):
         entrada_nome = tk.Entry(janela, width=25)
         entrada_nome.pack(pady=(0, 10))
 
-        with open(f"{diretorio}/{entrada_nome}.csv", "x", encoding = "UTF-8") as arquivo:
-            arquivo.write("Tarefa;Status")
+        def criar():
+            nome = entrada_nome.get().strip()
+            if nome:
+                caminho = f"{diretorio}/{nome}.csv"
+                with open(caminho, "x", encoding="UTF-8") as arquivo:
+                    arquivo.write("Tarefa;Status\n")
 
-        janela_principal.caminho_arquivo = f"{diretorio}/{entrada_nome}.csv"
+                # salva como atributo da janela principal
+                janela_principal.caminho_arquivo = caminho  
+                janela.destroy()
+            else:
+                tk.Label(janela, text="Digite um nome válido!", fg="red").pack()
+
+        tk.Button(janela, text="Criar", command=criar).pack(pady=(0, 10))
+        
 
