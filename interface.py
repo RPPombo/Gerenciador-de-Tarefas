@@ -3,6 +3,9 @@ from auxiliares import *
 from gerenciar_dataframes import *
 from gerenciar_arquivos import *
 
+fonte_titulo = ("Arial", 20)
+fonte_botao = ("Arial", 13)
+
 def atualizar_frame_esquerda(janela: tk.Tk):
     frame_esquerda = janela.frame_esquerda
 
@@ -11,15 +14,15 @@ def atualizar_frame_esquerda(janela: tk.Tk):
         widget.destroy()
 
     # Recriar interface
-    tk.Label(frame_esquerda, text="Arquivos").pack(pady=10)
-    tk.Button(frame_esquerda, text="Selecionar arquivo", command=lambda: selecionar_arquivo(janela)).pack(pady=10)
-    tk.Button(frame_esquerda, text="Criar arquivo", command=lambda: criar_arquivo_csv(janela)).pack(pady=10)
+    tk.Label(frame_esquerda, text="Arquivos", font= fonte_titulo).pack(pady=10)
+    tk.Button(frame_esquerda, text="Selecionar arquivo",font= fonte_botao, command=lambda: selecionar_arquivo(janela)).pack(pady=10)
+    tk.Button(frame_esquerda, text="Criar arquivo",font= fonte_botao, command=lambda: criar_arquivo_csv(janela)).pack(pady=10)
 
     # Só aparece se houver caminho de arquivo válido
     if janela.caminho_arquivo:
-        tk.Label(frame_esquerda, text="Tarefas").pack(pady=10)
+        tk.Label(frame_esquerda, text="Tarefas", font= fonte_titulo).pack(pady=10)
 
-        tk.Button(frame_esquerda, text="Adicionar Tarefa", command=lambda: adicionar_tarefa(janela)).pack(pady=10)
+        tk.Button(frame_esquerda, text="Adicionar Tarefa",font= fonte_botao,command=lambda: adicionar_tarefa(janela)).pack(pady=10)
 
 
 def janela_principal() -> tk.Tk:
