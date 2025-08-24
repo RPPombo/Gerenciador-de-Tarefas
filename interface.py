@@ -1,37 +1,48 @@
 import tkinter as tk
-from gerenciar_arquivos import *
-from gerenciar_dataframes import *
 from auxiliares import *
+from gerenciar_dataframes import *
+from gerenciar_arquivos import *
+
+def atualizar_frame_esquerda(janela: tk.Tk):
+    frame_esquerda = janela.frame_esquerda
+
+    # Limpar frame
+    for widget in frame_esquerda.winfo_children():
+        widget.destroy()
+
+    # Recriar interface
+    tk.Label(frame_esquerda, text="Arquivos").pack(pady=10)
+    tk.Button(frame_esquerda, text="Selecionar arquivo", command=lambda: selecionar_arquivo(janela)).pack(pady=10)
+    tk.Button(frame_esquerda, text="Criar arquivo", command=lambda: criar_arquivo_csv(janela)).pack(pady=10)
+
+    # Só aparece se houver caminho de arquivo válido
+    if janela.caminho_arquivo:
+        tk.Label(frame_esquerda, text="Tarefas").pack(pady=10)
+
+        tk.Button(frame_esquerda, text="Adicionar Tarefa", command=lambda: adicionar_tarefa(janela)).pack(pady=10)
+
 
 def janela_principal() -> tk.Tk:
     janela = tk.Tk()
     janela.title("Janela Principal")
-    centralizar_janela(janela, 1400, 800)
+    centralizar_janela(janela, 1200, 600)
 
-    # Frames
-    frame_esquerda = tk.Frame(janela, bg="yellow", width=400, height=800)
-    frame_esquerda.grid(column=0, sticky="nsew")
+    janela.caminho_arquivo = None
 
-    frame_direita = tk.Frame(janela, bg="green", width=1000)
-    frame_direita.grid(column=1, sticky="nsew")
+    # Criar frames
+    janela.frame_esquerda = tk.Frame(janela, bg="yellow", width=300)
+    janela.frame_esquerda.grid(column=0, row=0, sticky="nsew")
 
-    janela.grid_columnconfigure(0, minsize=400)
-    janela.grid_columnconfigure(1, minsize=1000)
+    frame_direita = tk.Frame(janela, bg="green")
+    frame_direita.grid(column=1, row=0, sticky="nsew")
 
-    # Frame Esquerdo
-    tk.Label(frame_esquerda, text="Arquivos").pack(pady=10)
+    janela.grid_columnconfigure(0, minsize=300)
+    janela.grid_columnconfigure(1, weight=1)
+    janela.grid_rowconfigure(0, weight=1)
 
-    # Seleção de arquivo
-    tk.Button(frame_esquerda, text="Selecionar arquivo", command=lambda: selecionar_arquivo(janela)).pack(pady=10)
-
-    # Criação de arquivo
-    tk.Button(frame_esquerda, text="Criar arquivo", command=lambda: criar_arquivo_csv(janela)).pack(pady=10)
-    
-    tk.Label(frame_esquerda, text="Tarefas").pack(pady=10)
-
-    # Adição de tarefa
-    tk.Button(frame_esquerda, text="Adicionar Tarefa", command=lambda: adicionar_tarefa(janela)).pack(pady=10)
-    
+    # Inicializa menu lateral
+    atualizar_frame_esquerda(janela)
+        
     # Frame Direito
     # Scrollbar
     canvas = tk.Canvas(frame_direita)
