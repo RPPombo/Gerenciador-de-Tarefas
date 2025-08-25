@@ -63,5 +63,29 @@ def atualizar_status(janela_principal: tk.Tk):
 
     tk.Button(janela, text="Atualizar", command=atualizar).pack(pady=(0,10))
 
-def atualizar_tarefa(df: pd.DataFrame, indice: int, tarefa_atualizada: str):
-    df.loc[indice, "Tarefa"] = [tarefa_atualizada]
+def atualizar_tarefa(janela_principal: tk.Tk):
+    # Criando uma janela de input
+    janela = tk.Toplevel(janela_principal)
+    janela.title("Input de Tarefa")
+    centralizar_janela(janela, 400, 200)
+
+    tk.Label(janela, text="Índice da Tarefa:").pack(pady=(20, 5))
+    entrada_indice = tk.Entry(janela, width=25)
+    entrada_indice.pack(pady=(0, 10))
+    tk.Label(janela, text="Tarefa:").pack(pady=(20,5))
+    entrada_tarefa = tk.Entry(janela, width= 25)
+    entrada_tarefa.pack(pady=(0,10))
+
+    def atualizar():
+        indice = int(entrada_indice.get().strip())
+        tarefa = entrada_tarefa.get().strip()
+
+        if tarefa and indice:
+            try:
+                janela_principal.df.loc[indice, "Tarefa"] = tarefa
+                janela.destroy()
+            except (IndexError, ValueError):
+                tk.Label(janela, text="Index inválido!", fg="red").pack()
+
+    tk.Button(janela, text="Atualizar", command=atualizar).pack(pady=(0,10))
+    

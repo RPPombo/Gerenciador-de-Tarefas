@@ -26,6 +26,8 @@ def atualizar_frame_esquerda(janela: tk.Tk):
 
         tk.Button(frame_esquerda, text="Atualizar Status", font= fonte_botao, command= lambda: atualizar_status(janela))
 
+        tk.Button(frame_esquerda, text="Atualizar Tarefa", font=fonte_botao, command=lambda: atualizar_tarefa(janela))
+
 
 def janela_principal() -> tk.Tk:
     janela = tk.Tk()
