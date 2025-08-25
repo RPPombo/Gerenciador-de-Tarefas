@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import filedialog
 from auxiliares import *
 from interface import atualizar_frame_esquerda
+from gerenciar_dataframes import carregar_dataframe
 
 def selecionar_arquivo(janela_principal: tk.Tk):
     # Abre o seletor de arquivos usando a janela principal como parent
@@ -13,6 +14,7 @@ def selecionar_arquivo(janela_principal: tk.Tk):
     )
     if caminho_arquivo:
         janela_principal.caminho_arquivo = caminho_arquivo
+        carregar_dataframe(janela_principal)
         atualizar_frame_esquerda(janela_principal)
 
 
@@ -42,6 +44,7 @@ def criar_arquivo_csv(janela_principal: tk.Tk):
 
                 # salva como atributo da janela principal
                 janela_principal.caminho_arquivo = caminho
+                carregar_dataframe(janela_principal)
                 atualizar_frame_esquerda(janela_principal)
                 janela.destroy()
             else:

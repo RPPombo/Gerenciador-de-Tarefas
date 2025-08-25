@@ -2,16 +2,13 @@ import pandas as pd
 from auxiliares import *
 import tkinter as tk
 
-def carregar_dataframe(caminho_arquivo: str, janela_principal: tk.Tk) -> pd.DataFrame:
+def carregar_dataframe(janela_principal: tk.Tk):
     # Leitura do arquivo escolhido 
-    df = pd.read_csv(caminho_arquivo)
+    janela_principal.df = pd.read_csv(janela_principal.caminho_arquivo)
 
-    # Salvamento do dataframe em uma variável dentro da janela principal
-    janela_principal.df = df
-
-def salvar_arquivo(caminho_arquivo: str, janela_principal: tk.Tk):
+def salvar_arquivo(janela_principal: tk.Tk):
     # Salva o dataframe no arquivo escolhido
-    janela_principal.df.to_csv(caminho_arquivo, sep = ";", index = False)
+    janela_principal.df.to_csv(janela_principal.caminho_arquivo, sep = ";", index = False)
 
 def adicionar_tarefa(janela_principal: tk.Tk):
     # Criando uma janela de input
@@ -86,6 +83,8 @@ def atualizar_tarefa(janela_principal: tk.Tk):
                 janela.destroy()
             except (IndexError, ValueError):
                 tk.Label(janela, text="Index inválido!", fg="red").pack()
+        else:
+            tk.Label(janela, text="Preencha corretamente os campos!", fg="red").pack() 
 
     tk.Button(janela, text="Atualizar", command=atualizar).pack(pady=(0,10))
     

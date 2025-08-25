@@ -20,13 +20,15 @@ def atualizar_frame_esquerda(janela: tk.Tk):
 
     # Só aparece se houver caminho de arquivo válido
     if janela.caminho_arquivo:
+        tk.Button(frame_esquerda, text="Salvar Arquivo", font=fonte_botao, command=salvar_arquivo(janela)).pack(pady=10)
+
         tk.Label(frame_esquerda, text="Tarefas", font= fonte_titulo).pack(pady=10)
 
         tk.Button(frame_esquerda, text="Adicionar Tarefa",font= fonte_botao,command=lambda: adicionar_tarefa(janela)).pack(pady=10)
 
-        tk.Button(frame_esquerda, text="Atualizar Status", font= fonte_botao, command= lambda: atualizar_status(janela))
+        tk.Button(frame_esquerda, text="Atualizar Status", font= fonte_botao, command= lambda: atualizar_status(janela)).pack(pady=10)
 
-        tk.Button(frame_esquerda, text="Atualizar Tarefa", font=fonte_botao, command=lambda: atualizar_tarefa(janela))
+        tk.Button(frame_esquerda, text="Atualizar Tarefa", font=fonte_botao, command=lambda: atualizar_tarefa(janela)).pack(pady=10)
 
 
 def janela_principal() -> tk.Tk:
