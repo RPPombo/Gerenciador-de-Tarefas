@@ -5,6 +5,7 @@ import tkinter as tk
 def carregar_dataframe(janela_principal: tk.Tk):
     # Leitura do arquivo escolhido 
     janela_principal.df = pd.read_csv(janela_principal.caminho_arquivo)
+    
 
 def salvar_arquivo(janela_principal: tk.Tk):
     # Salva o dataframe no arquivo escolhido

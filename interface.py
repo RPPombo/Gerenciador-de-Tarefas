@@ -30,6 +30,22 @@ def atualizar_frame_esquerda(janela: tk.Tk):
 
         tk.Button(frame_esquerda, text="Atualizar Tarefa", font=fonte_botao, command=lambda: atualizar_tarefa(janela)).pack(pady=10)
 
+def atualizar_frame_direita(janela: tk.Tk):
+    frame_direita = janela.frame_direita
+
+    # Limpar frame
+    for widget in frame_direita.winfo_children():
+        widget.destroy()
+
+    if janela.caminho_arquivo:
+        carregar_dataframe(janela)
+        texto_df = tk.Text(frame_direita, wrap="none", font=("Courier New", 10))
+        texto_df.insert("1.0", janela.df.to_string(index=True))  # inclui índices
+        texto_df.config(state="disabled")  # só leitura
+        texto_df.pack(fill="both", expand=True, pady=10)
+    else:
+        tk.Label(frame_direita, text="Nenhum arquivo selecionado!").pack(pady=10)
+
 
 def janela_principal() -> tk.Tk:
     janela = tk.Tk()
@@ -37,13 +53,14 @@ def janela_principal() -> tk.Tk:
     centralizar_janela(janela, 1200, 600)
 
     janela.caminho_arquivo = None
+    janela.df = None
 
     # Criar frames
     janela.frame_esquerda = tk.Frame(janela, bg="yellow", width=300)
     janela.frame_esquerda.grid(column=0, row=0, sticky="nsew")
 
-    frame_direita = tk.Frame(janela, bg="green")
-    frame_direita.grid(column=1, row=0, sticky="nsew")
+    janela.frame_direita = tk.Frame(janela, bg="green")
+    janela.frame_direita.grid(column=1, row=0, sticky="nsew")
 
     janela.grid_columnconfigure(0, minsize=300)
     janela.grid_columnconfigure(1, weight=1)
@@ -54,6 +71,7 @@ def janela_principal() -> tk.Tk:
         
     # Frame Direito
     # Scrollbar
+    ''''
     canvas = tk.Canvas(frame_direita)
     canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
@@ -68,7 +86,9 @@ def janela_principal() -> tk.Tk:
     def ajustar_scroll(event):
         canvas.configure(scrollregion=canvas.bbox("all"))
 
-    frame_scroll.bind("<Configure>", ajustar_scroll)
+    frame_scroll.bind("<Configure>", ajustar_scroll)'''
+
+    atualizar_frame_direita(janela)
 
     return janela
 
