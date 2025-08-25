@@ -44,12 +44,12 @@ def atualizar_status(janela_principal: tk.Tk):
     entrada_status.pack(pady=(0,10))
 
     def atualizar():
-        indice = int(entrada_indice.get().strip())
+        indice = entrada_indice.get().strip()
         status = entrada_status.get().strip()
         
         if status and indice:
             try:
-                janela_principal.df.loc[indice, "Status"] = status
+                janela_principal.df.loc[int(indice), "Status"] = status
                 atualizar_frame_direita(janela_principal)
                 janela.destroy()
             except (IndexError, ValueError):
@@ -73,12 +73,12 @@ def atualizar_tarefa(janela_principal: tk.Tk):
     entrada_tarefa.pack(pady=(0,10))
 
     def atualizar():
-        indice = int(entrada_indice.get().strip())
+        indice = entrada_indice.get().strip()
         tarefa = entrada_tarefa.get().strip()
 
         if tarefa and indice:
             try:
-                janela_principal.df.loc[indice, "Tarefa"] = tarefa
+                janela_principal.df.loc[int(indice), "Tarefa"] = tarefa
                 atualizar_frame_direita(janela_principal)
                 janela.destroy()
             except (IndexError, ValueError):
