@@ -75,7 +75,7 @@ def criar_arquivo_csv(janela_principal: tk.Tk):
             if nome:
                 caminho = f"{diretorio}/{nome}.csv"
                 with open(caminho, "x", encoding="UTF-8") as arquivo:
-                    arquivo.write("Tarefa;Status\n")
+                    arquivo.write("Tarefa;Status;Data de Modificação\n")
 
                 # salva como atributo da janela principal
                 janela_principal.caminho_arquivo = caminho

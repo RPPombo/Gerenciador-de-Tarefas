@@ -1,7 +1,8 @@
 import pandas as pd
 from auxiliares import *
 import tkinter as tk
-from frame_direita import atualizar_frame_direita 
+from frame_direita import atualizar_frame_direita
+from time import localtime, strftime
 
 def salvar_arquivo(janela_principal: tk.Tk):
     # Salva o dataframe no arquivo escolhido
@@ -21,7 +22,7 @@ def adicionar_tarefa(janela_principal: tk.Tk):
         tarefa = entrada_tarefa.get().strip()
 
         if tarefa:
-            nova_linha = pd.DataFrame({'Tarefa': [tarefa], 'Status': ['Não Iniciada']})
+            nova_linha = pd.DataFrame({'Tarefa': [tarefa], 'Status': ['Não Iniciada'], 'Data de Modificação': [strftime('%d/%m/%Y %H:%M:%S', localtime())]})
             janela_principal.df = pd.concat([janela_principal.df, nova_linha], ignore_index=True)
             atualizar_frame_direita(janela_principal)
             janela.destroy()
@@ -50,6 +51,7 @@ def atualizar_status(janela_principal: tk.Tk):
         if status and indice:
             try:
                 janela_principal.df.loc[int(indice), "Status"] = status
+                janela_principal.df.loc[int(indice), 'Data de Modificação'] = strftime('%d/%m/%Y %H:%M:%S', localtime())
                 atualizar_frame_direita(janela_principal)
                 janela.destroy()
             except (IndexError, ValueError):
@@ -79,6 +81,7 @@ def atualizar_tarefa(janela_principal: tk.Tk):
         if tarefa and indice:
             try:
                 janela_principal.df.loc[int(indice), "Tarefa"] = tarefa
+                janela_principal.df.loc[int(indice), 'Data de Modificação'] = strftime('%d/%m/%Y %H:%M:%S', localtime())
                 atualizar_frame_direita(janela_principal)
                 janela.destroy()
             except (IndexError, ValueError):
