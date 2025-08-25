@@ -1,9 +1,43 @@
 import tkinter as tk
 from tkinter import filedialog
 from auxiliares import *
-from interface import atualizar_frame_esquerda
-from gerenciar_dataframes import carregar_dataframe
+import pandas as pd
+from frame_direita import atualizar_frame_direita
+from gerenciar_dataframes import salvar_arquivo, adicionar_tarefa, atualizar_status, atualizar_tarefa
 
+fonte_titulo = ("Arial", 20)
+fonte_botao = ("Arial", 13)
+
+def atualizar_frame_esquerda(janela: tk.Tk):
+    frame_esquerda = janela.frame_esquerda
+
+    for widget in frame_esquerda.winfo_children():
+        widget.destroy()
+
+    tk.Label(frame_esquerda, text="Arquivos", font=fonte_titulo).pack(pady=10)
+
+    tk.Button(frame_esquerda, text="Selecionar arquivo", font=fonte_botao,
+              command=lambda: selecionar_arquivo(janela)).pack(pady=10)
+
+    tk.Button(frame_esquerda, text="Criar arquivo", font=fonte_botao,
+              command=lambda: criar_arquivo_csv(janela)).pack(pady=10)
+
+    if janela.caminho_arquivo:
+        tk.Button(frame_esquerda, text="Salvar Arquivo", font=fonte_botao,
+                  command=lambda: salvar_arquivo(janela)).pack(pady=10)
+
+        tk.Label(frame_esquerda, text="Tarefas", font=fonte_titulo).pack(pady=10)
+
+        tk.Button(frame_esquerda, text="Adicionar Tarefa", font=fonte_botao,
+                  command=lambda: adicionar_tarefa(janela)).pack(pady=10)
+
+        tk.Button(frame_esquerda, text="Atualizar Status", font=fonte_botao,
+                  command=lambda: atualizar_status(janela)).pack(pady=10)
+
+        tk.Button(frame_esquerda, text="Atualizar Tarefa", font=fonte_botao,
+                  command=lambda: atualizar_tarefa(janela)).pack(pady=10)
+
+# -------Botões de Carregamento de arquivo---------
 def selecionar_arquivo(janela_principal: tk.Tk):
     # Abre o seletor de arquivos usando a janela principal como parent
     caminho_arquivo = filedialog.askopenfilename(
@@ -16,6 +50,7 @@ def selecionar_arquivo(janela_principal: tk.Tk):
         janela_principal.caminho_arquivo = caminho_arquivo
         carregar_dataframe(janela_principal)
         atualizar_frame_esquerda(janela_principal)
+        atualizar_frame_direita(janela_principal)
 
 
 def criar_arquivo_csv(janela_principal: tk.Tk):
@@ -46,10 +81,9 @@ def criar_arquivo_csv(janela_principal: tk.Tk):
                 janela_principal.caminho_arquivo = caminho
                 carregar_dataframe(janela_principal)
                 atualizar_frame_esquerda(janela_principal)
+                atualizar_frame_direita(janela_principal)
                 janela.destroy()
             else:
                 tk.Label(janela, text="Digite um nome válido!", fg="red").pack()
 
         tk.Button(janela, text="Criar", command=criar).pack(pady=(0, 10))
-        
-

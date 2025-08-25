@@ -1,4 +1,5 @@
 import tkinter as tk
+import pandas as pd
 
 def centralizar_janela(janela: tk.Tk, largura: int, altura: int):
     # Conseguindo o tamanho da tela
@@ -11,3 +12,7 @@ def centralizar_janela(janela: tk.Tk, largura: int, altura: int):
 
     # Aplicando as coordenadas
     janela.geometry(f"{largura}x{altura}+{x}+{y}")
+
+def carregar_dataframe(janela_principal: tk.Tk):
+    # Leitura do arquivo escolhido 
+    janela_principal.df = pd.read_csv(janela_principal.caminho_arquivo, sep=";")

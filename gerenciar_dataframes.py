@@ -1,11 +1,7 @@
 import pandas as pd
 from auxiliares import *
 import tkinter as tk
-
-def carregar_dataframe(janela_principal: tk.Tk):
-    # Leitura do arquivo escolhido 
-    janela_principal.df = pd.read_csv(janela_principal.caminho_arquivo)
-    
+from frame_direita import atualizar_frame_direita 
 
 def salvar_arquivo(janela_principal: tk.Tk):
     # Salva o dataframe no arquivo escolhido
@@ -27,6 +23,7 @@ def adicionar_tarefa(janela_principal: tk.Tk):
         if tarefa:
             nova_linha = pd.DataFrame({'Tarefa': [tarefa], 'Status': ['Não Iniciada']})
             janela_principal.df = pd.concat([janela_principal.df, nova_linha], ignore_index=True)
+            atualizar_frame_direita(janela_principal)
             janela.destroy()
         else:
             tk.Label(janela, text="Digite um nome válido!", fg="red").pack()
@@ -53,6 +50,7 @@ def atualizar_status(janela_principal: tk.Tk):
         if status and indice:
             try:
                 janela_principal.df.loc[indice, "Status"] = status
+                atualizar_frame_direita(janela_principal)
                 janela.destroy()
             except (IndexError, ValueError):
                 tk.Label(janela, text="Index inválido!", fg="red").pack() 
@@ -81,6 +79,7 @@ def atualizar_tarefa(janela_principal: tk.Tk):
         if tarefa and indice:
             try:
                 janela_principal.df.loc[indice, "Tarefa"] = tarefa
+                atualizar_frame_direita(janela_principal)
                 janela.destroy()
             except (IndexError, ValueError):
                 tk.Label(janela, text="Index inválido!", fg="red").pack()
@@ -88,4 +87,3 @@ def atualizar_tarefa(janela_principal: tk.Tk):
             tk.Label(janela, text="Preencha corretamente os campos!", fg="red").pack() 
 
     tk.Button(janela, text="Atualizar", command=atualizar).pack(pady=(0,10))
-    
