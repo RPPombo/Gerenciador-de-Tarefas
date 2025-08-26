@@ -56,6 +56,8 @@ def atualizar_frame_direita(janela: tk.Tk):
             tk.Label(colunaIndex, text=str(i), font=fonte_df).pack(pady=2)
             tk.Label(colunaTarefa, text=row["Tarefa"], font=fonte_df).pack(pady=2)
             tk.Label(colunaStatus, text=row["Status"], font=fonte_df).pack(pady=2)
-            tk.Label(colunaModificacao, text=row["Data de Modificação"], font=fonte_df).pack(pady=2)
+            tk.Label(colunaModificacao, text=row["Data de Modificação"], font=fonte_df).pack(pady=2)  
+    elif janela.df is not None and janela.df.empty:
+        tk.Label(frame_interno, text="Nenhum dado presente!", font=fonte_df).grid(column=0, row=0, columnspan=4, pady=10)
     else:
-        tk.Label(frame_interno, text="Nenhum arquivo selecionado!", font=fonte_df).grid(column=0, row=0, columnspan=4, pady=10)
+        tk.Label(frame_interno, text="Nenhum arquivo carregado!", font=fonte_df).grid(column=0, row=0, columnspan=4, pady=10)
