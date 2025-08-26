@@ -90,3 +90,29 @@ def atualizar_tarefa(janela_principal: tk.Tk):
             tk.Label(janela, text="Preencha corretamente os campos!", fg="red").pack() 
 
     tk.Button(janela, text="Atualizar", command=atualizar).pack(pady=(0,10))
+
+def deletar_tarefa(janela_principal: tk.Tk):
+    # Criando uma janela de input
+    janela = tk.Toplevel(janela_principal)
+    janela.title("Input de Índice")
+    centralizar_janela(janela, 400, 200)
+
+    tk.Label(janela, text="Índice da Tarefa:").pack(pady=(20, 5))
+    entrada_indice = tk.Entry(janela, width=25)
+    entrada_indice.pack(pady=(0, 10))
+
+    def deletar():
+        indice = entrada_indice.get().strip()
+
+        if indice:
+            try:
+                janela_principal.df.drop(index = int(indice), inplace = True)
+                janela_principal.df.reset_index(drop=True, inplace = True)
+                atualizar_frame_direita(janela_principal)
+                janela.destroy()
+            except (IndexError, ValueError):
+                tk.Label(janela, text="Index Inválido", fg="red").pack()
+        else:
+            tk.Label(janela, text="Preencha corretamente o campo!", fg="red").pack()
+        
+    tk.Button(janela, text="Deletar", command=deletar).pack(pady=(0,10))
