@@ -1,12 +1,8 @@
 import tkinter as tk
 from tkinter import filedialog
 from auxiliares import *
-import pandas as pd
 from frame_direita import atualizar_frame_direita
 from gerenciar_dataframes import *
-
-fonte_titulo = ("Arial", 20)
-fonte_botao = ("Arial", 13)
 
 def atualizar_frame_esquerda(janela: tk.Tk):
     frame_esquerda = janela.frame_esquerda

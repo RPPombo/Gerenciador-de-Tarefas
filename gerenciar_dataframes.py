@@ -14,7 +14,7 @@ def adicionar_tarefa(janela_principal: tk.Tk):
     janela.title("Input de tarefa")
     centralizar_janela(janela, 400, 200)
 
-    tk.Label(janela, text="Nome da tarefa:").pack(pady=(20, 5))
+    tk.Label(janela, text="Nome da tarefa:", font= fonte_titulo).pack(pady=(20, 5))
     entrada_tarefa = tk.Entry(janela, width=25)
     entrada_tarefa.pack(pady=(0, 10))
 
@@ -37,10 +37,10 @@ def atualizar_status(janela_principal: tk.Tk):
     janela.title("Input de Status")
     centralizar_janela(janela, 400, 200)
 
-    tk.Label(janela, text="Índice da Tarefa:").pack(pady=(20, 5))
+    tk.Label(janela, text="Índice da Tarefa:", font= fonte_titulo).pack(pady=(20, 5))
     entrada_indice = tk.Entry(janela, width=25)
     entrada_indice.pack(pady=(0, 10))
-    tk.Label(janela, text="Status:").pack(pady=(20,5))
+    tk.Label(janela, text="Status:", font= fonte_titulo).pack(pady=(20,5))
     entrada_status = tk.Entry(janela, width= 25)
     entrada_status.pack(pady=(0,10))
 
@@ -67,10 +67,10 @@ def atualizar_tarefa(janela_principal: tk.Tk):
     janela.title("Input de Tarefa")
     centralizar_janela(janela, 400, 200)
 
-    tk.Label(janela, text="Índice da Tarefa:").pack(pady=(20, 5))
+    tk.Label(janela, text="Índice da Tarefa:", font= fonte_titulo).pack(pady=(20, 5))
     entrada_indice = tk.Entry(janela, width=25)
     entrada_indice.pack(pady=(0, 10))
-    tk.Label(janela, text="Tarefa:").pack(pady=(20,5))
+    tk.Label(janela, text="Tarefa:", font= fonte_titulo).pack(pady=(20,5))
     entrada_tarefa = tk.Entry(janela, width= 25)
     entrada_tarefa.pack(pady=(0,10))
 
@@ -94,7 +94,7 @@ def atualizar_tarefa(janela_principal: tk.Tk):
 def deletar_tarefa(janela_principal: tk.Tk):
     # Criando uma janela de input
     janela = tk.Toplevel(janela_principal)
-    janela.title("Input de Índice")
+    janela.title("Input de Índice", font= fonte_titulo)
     centralizar_janela(janela, 400, 200)
 
     tk.Label(janela, text="Índice da Tarefa:").pack(pady=(20, 5))

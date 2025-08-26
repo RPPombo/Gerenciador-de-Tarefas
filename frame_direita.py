@@ -1,4 +1,5 @@
 import tkinter as tk
+from auxiliares import fonte_titulo
 
 fonte_titulo = ("Arial", 20)
 
@@ -9,7 +10,7 @@ def atualizar_frame_direita(janela: tk.Tk):
         widget.destroy()
 
     if janela.df is not None:
-        texto_df = tk.Text(frame_direita, wrap="none", font=("Courier New", 11))
+        texto_df = tk.Text(frame_direita, wrap="none", font= fonte_titulo)
         texto_df.insert("1.0", janela.df.to_string(index=True))
         texto_df.config(state="disabled")
         texto_df.pack(pady=10)

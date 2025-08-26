@@ -1,6 +1,9 @@
 import tkinter as tk
 import pandas as pd
 
+fonte_titulo = ("Arial", 20)
+fonte_botao = ("Arial", 13)
+
 def centralizar_janela(janela: tk.Tk, largura: int, altura: int):
     # Conseguindo o tamanho da tela
     largura_tela = janela.winfo_screenwidth()
