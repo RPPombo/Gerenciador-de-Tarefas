@@ -94,10 +94,10 @@ def atualizar_tarefa(janela_principal: tk.Tk):
 def deletar_tarefa(janela_principal: tk.Tk):
     # Criando uma janela de input
     janela = tk.Toplevel(janela_principal)
-    janela.title("Input de Índice", font= fonte_titulo)
+    janela.title("Input de Índice")
     centralizar_janela(janela, 400, 200)
 
-    tk.Label(janela, text="Índice da Tarefa:").pack(pady=(20, 5))
+    tk.Label(janela, text="Índice da Tarefa:", font= fonte_titulo).pack(pady=(20, 5))
     entrada_indice = tk.Entry(janela, width=25)
     entrada_indice.pack(pady=(0, 10))
 
