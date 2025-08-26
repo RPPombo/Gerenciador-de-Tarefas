@@ -13,11 +13,11 @@ def janela_principal() -> tk.Tk:
     janela.df = None
 
     # frame esquerda
-    janela.frame_esquerda = tk.Frame(janela, bg="yellow", width=300)
+    janela.frame_esquerda = tk.Frame(janela, width=300, bd=3, relief="solid")
     janela.frame_esquerda.grid(column=0, row=0, sticky="nsew")
 
     # frame direita
-    janela.frame_direita = tk.Frame(janela, bg="green")
+    janela.frame_direita = tk.Frame(janela)
     janela.frame_direita.grid(column=1, row=0, sticky="nsew")
 
     # ajustes do grid
