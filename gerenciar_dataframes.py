@@ -12,8 +12,11 @@ def salvar_arquivo(janela_principal: tk.Tk):
     centralizar_janela(janela, 400, 100)
 
     tk.Label(janela, text="Arquivo Salvo!", fg="green", font=fonte_titulo).pack(pady=(20,5))
+    print("Arquivo salvo")
     def fechar_janela():
         janela.destroy()
+
+    # Destrói a janela após 1 segundo
     janela.after(1000,fechar_janela)
 
 def adicionar_tarefa(janela_principal: tk.Tk):
@@ -30,8 +33,10 @@ def adicionar_tarefa(janela_principal: tk.Tk):
         tarefa = entrada_tarefa.get().strip()
 
         if tarefa:
+            # Escreve a linha e salva no dataframe
             nova_linha = pd.DataFrame({'Tarefa': [tarefa], 'Status': ['Não Iniciada'], 'Data de Modificação': [strftime('%d/%m/%Y %H:%M:%S', localtime())]})
             janela_principal.df = pd.concat([janela_principal.df, nova_linha], ignore_index=True)
+            print(f"Linha: {nova_linha}, adicionada")
             atualizar_frame_direita(janela_principal)
             janela.destroy()
         else:
@@ -58,8 +63,10 @@ def atualizar_status(janela_principal: tk.Tk):
         
         if status and indice:
             try:
+                # Altera o status de uma tarefa
                 janela_principal.df.loc[int(indice), "Status"] = status
                 janela_principal.df.loc[int(indice), 'Data de Modificação'] = strftime('%d/%m/%Y %H:%M:%S', localtime())
+                print(f"Status de índice: {indice} atulizado")
                 atualizar_frame_direita(janela_principal)
                 janela.destroy()
             except (IndexError, ValueError):
@@ -88,8 +95,10 @@ def atualizar_tarefa(janela_principal: tk.Tk):
 
         if tarefa and indice:
             try:
+                # Altera uma tarefa 
                 janela_principal.df.loc[int(indice), "Tarefa"] = tarefa
                 janela_principal.df.loc[int(indice), 'Data de Modificação'] = strftime('%d/%m/%Y %H:%M:%S', localtime())
+                print(f"Tarefa de índice: {indice} atulizado")
                 atualizar_frame_direita(janela_principal)
                 janela.destroy()
             except (IndexError, ValueError):
@@ -114,8 +123,10 @@ def deletar_tarefa(janela_principal: tk.Tk):
 
         if indice:
             try:
+                # Deleta uma tarefa
                 janela_principal.df.drop(index = int(indice), inplace = True)
                 janela_principal.df.reset_index(drop=True, inplace = True)
+                print(f"Tarefa de índice: {indice} deletada")
                 atualizar_frame_direita(janela_principal)
                 janela.destroy()
             except (IndexError, ValueError):
