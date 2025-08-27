@@ -1,6 +1,7 @@
 import tkinter as tk
 import pandas as pd
 
+# ---Fontes do programa---
 fonte_titulo = ("Arial", 20)
 fonte_botao = ("Arial", 13)
 fonte_df = ("Arial", 12)
@@ -18,5 +19,6 @@ def centralizar_janela(janela: tk.Tk, largura: int, altura: int):
     janela.geometry(f"{largura}x{altura}+{x}+{y}")
 
 def carregar_dataframe(janela_principal: tk.Tk):
-    # Leitura do arquivo escolhido 
+    # Leitura do arquivo escolhido e carregando em um dataframe
     janela_principal.df = pd.read_csv(janela_principal.caminho_arquivo, sep=";")
+    print("Arquivo carregado")
