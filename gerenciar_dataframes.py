@@ -2,11 +2,19 @@ import pandas as pd
 from auxiliares import *
 import tkinter as tk
 from frame_direita import atualizar_frame_direita
-from time import localtime, strftime
+from time import localtime, strftime, sleep
 
 def salvar_arquivo(janela_principal: tk.Tk):
     # Salva o dataframe no arquivo escolhido
     janela_principal.df.to_csv(janela_principal.caminho_arquivo, sep = ";", index = False)
+    janela = tk.Toplevel(janela_principal)
+    janela.title("Salvamento")
+    centralizar_janela(janela, 400, 100)
+
+    tk.Label(janela, text="Arquivo Salvo!", fg="green", font=fonte_titulo).pack(pady=(20,5))
+    def fechar_janela():
+        janela.destroy()
+    janela.after(1000,fechar_janela)
 
 def adicionar_tarefa(janela_principal: tk.Tk):
     # Criando uma janela de input
