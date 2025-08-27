@@ -7,15 +7,18 @@ from gerenciar_dataframes import *
 def atualizar_frame_esquerda(janela: tk.Tk):
     frame_esquerda = janela.frame_esquerda
 
+    # Limpando o conteúdo anterior
     for widget in frame_esquerda.winfo_children():
         widget.destroy()
 
+    # Criando os botões de ação
     tk.Label(frame_esquerda, text="Arquivos", font=fonte_titulo).pack(pady=10)
 
     tk.Button(frame_esquerda, text="Selecionar arquivo", font=fonte_botao,command=lambda: selecionar_arquivo(janela)).pack(pady=10)
 
     tk.Button(frame_esquerda, text="Criar arquivo", font=fonte_botao,command=lambda: criar_arquivo_csv(janela)).pack(pady=10)
 
+    # Botões que aparecem somente quando arquivo é carregado
     if janela.caminho_arquivo:
         tk.Button(frame_esquerda, text="Salvar Arquivo", font=fonte_botao,
                   command=lambda: salvar_arquivo(janela)).pack(pady=10)
@@ -30,7 +33,9 @@ def atualizar_frame_esquerda(janela: tk.Tk):
         
         tk.Button(frame_esquerda, text="Deletar Tarefa", font=fonte_botao, command=lambda: deletar_tarefa(janela)).pack(pady=(10))
 
-# -------Botões de Carregamento de arquivo---------
+        print("Frame esquerda carregado")
+
+# ---Botões de Carregamento de arquivo---
 def selecionar_arquivo(janela_principal: tk.Tk):
     # Abre o seletor de arquivos usando a janela principal como parent
     caminho_arquivo = filedialog.askopenfilename(
@@ -44,6 +49,7 @@ def selecionar_arquivo(janela_principal: tk.Tk):
         carregar_dataframe(janela_principal)
         atualizar_frame_esquerda(janela_principal)
         atualizar_frame_direita(janela_principal)
+        print("Arquivo Selecionado")
 
 
 def criar_arquivo_csv(janela_principal: tk.Tk):
@@ -55,6 +61,7 @@ def criar_arquivo_csv(janela_principal: tk.Tk):
     )
 
     if diretorio:
+        # Criando janela de criação de arquivo
         janela = tk.Toplevel(janela_principal)
         janela.title("Input do nome")
         centralizar_janela(janela, 400, 200)
@@ -70,8 +77,9 @@ def criar_arquivo_csv(janela_principal: tk.Tk):
                 with open(caminho, "x", encoding="UTF-8") as arquivo:
                     arquivo.write("Tarefa;Status;Data de Modificação\n")
 
-                # salva como atributo da janela principal
+                # Salva como atributo da janela principal
                 janela_principal.caminho_arquivo = caminho
+                print("Arquivo criado")
                 carregar_dataframe(janela_principal)
                 atualizar_frame_esquerda(janela_principal)
                 atualizar_frame_direita(janela_principal)
