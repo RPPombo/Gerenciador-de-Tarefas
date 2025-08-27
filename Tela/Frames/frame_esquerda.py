@@ -33,7 +33,7 @@ def atualizar_frame_esquerda(janela: tk.Tk):
         
         tk.Button(frame_esquerda, text="Deletar Tarefa", font=fonte_botao, command=lambda: deletar_tarefa(janela)).pack(pady=(10))
 
-        print("Frame esquerda carregado")
+    print("Frame esquerda carregado")
 
 # ---Botões de Carregamento de arquivo---
 def selecionar_arquivo(janela_principal: tk.Tk):
