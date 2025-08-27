@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import filedialog
-from auxiliares import *
-from frame_direita import atualizar_frame_direita
-from gerenciar_dataframes import *
+from Serviços.auxiliares import *
+from Tela.Frames.frame_direita import atualizar_frame_direita
+from Serviços.gerenciar_dataframes import *
 
 def atualizar_frame_esquerda(janela: tk.Tk):
     frame_esquerda = janela.frame_esquerda

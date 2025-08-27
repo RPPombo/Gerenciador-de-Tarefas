@@ -1,7 +1,7 @@
 import tkinter as tk
-from auxiliares import centralizar_janela
-from frame_direita import atualizar_frame_direita
-from frame_esquerda import atualizar_frame_esquerda
+from Serviços.auxiliares import centralizar_janela
+from Tela.Frames.frame_direita import atualizar_frame_direita
+from Tela.Frames.frame_esquerda import atualizar_frame_esquerda
 
 def janela_principal() -> tk.Tk:
     # Criando a janela principal

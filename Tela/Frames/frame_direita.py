@@ -1,5 +1,5 @@
 import tkinter as tk
-from auxiliares import fonte_df
+from Serviços.auxiliares import fonte_df
 
 def atualizar_frame_direita(janela: tk.Tk):
     frame_direita = janela.frame_direita

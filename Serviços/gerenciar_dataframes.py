@@ -1,7 +1,7 @@
 import pandas as pd
-from auxiliares import *
+from Serviços.auxiliares import *
 import tkinter as tk
-from frame_direita import atualizar_frame_direita
+from Tela.Frames.frame_direita import atualizar_frame_direita
 from time import localtime, strftime, sleep
 
 def salvar_arquivo(janela_principal: tk.Tk):
@@ -66,7 +66,7 @@ def atualizar_status(janela_principal: tk.Tk):
                 # Altera o status de uma tarefa
                 janela_principal.df.loc[int(indice), "Status"] = status
                 janela_principal.df.loc[int(indice), 'Data de Modificação'] = strftime('%d/%m/%Y %H:%M:%S', localtime())
-                print(f"Status de índice: {indice} atulizado")
+                print(f"Status de índice: {indice} atualizado")
                 atualizar_frame_direita(janela_principal)
                 janela.destroy()
             except (IndexError, ValueError):
@@ -98,7 +98,7 @@ def atualizar_tarefa(janela_principal: tk.Tk):
                 # Altera uma tarefa 
                 janela_principal.df.loc[int(indice), "Tarefa"] = tarefa
                 janela_principal.df.loc[int(indice), 'Data de Modificação'] = strftime('%d/%m/%Y %H:%M:%S', localtime())
-                print(f"Tarefa de índice: {indice} atulizado")
+                print(f"Tarefa de índice: {indice} atualizado")
                 atualizar_frame_direita(janela_principal)
                 janela.destroy()
             except (IndexError, ValueError):
