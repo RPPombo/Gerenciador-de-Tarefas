@@ -61,3 +61,5 @@ def atualizar_frame_direita(janela: tk.Tk):
         tk.Label(frame_interno, text="Nenhum dado presente!", font=fonte_df).grid(column=0, row=0, columnspan=4, pady=10)
     else:
         tk.Label(frame_interno, text="Nenhum arquivo carregado!", font=fonte_df).grid(column=0, row=0, columnspan=4, pady=10)
+
+    print("Frame direita carregado")
