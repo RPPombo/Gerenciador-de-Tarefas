@@ -46,10 +46,11 @@ def selecionar_arquivo(janela_principal: tk.Tk):
     )
     if caminho_arquivo:
         janela_principal.caminho_arquivo = caminho_arquivo
+        print("Arquivo Selecionado")
         carregar_dataframe(janela_principal)
         atualizar_frame_esquerda(janela_principal)
         atualizar_frame_direita(janela_principal)
-        print("Arquivo Selecionado")
+        
 
 
 def criar_arquivo_csv(janela_principal: tk.Tk):
