@@ -11,7 +11,7 @@ O Gerenciador de Tarefas tem como objetivo auxiliar na organização do dia a di
 
 A estrutura de diretórios do projeto está organizada da seguinte forma:  
 
-'''bash
+```bash
 Gerenciador-de-Tarefas/  
 │
 ├── Serviços/  
@@ -27,7 +27,7 @@ Gerenciador-de-Tarefas/
 ├── app.py  
 ├── .gitignore  
 └── README.md  
-'''
+```
 
 ## ⚙️ Funcionamento
 O projeto utiliza as seguintes bibliotecas do Python:  
@@ -40,9 +40,9 @@ O projeto utiliza as seguintes bibliotecas do Python:
 2. Instale as dependências necessárias (se houver).  
 3. Execute o arquivo principal:  
 
-'''bash
+```bash
 python app.py
-'''
+```
 
 ## 🖥 Uso
 * O programa possui uma interface gráfica simples e intuitiva, desenvolvida em tkinter.
