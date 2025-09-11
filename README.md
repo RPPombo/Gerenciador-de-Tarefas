@@ -43,10 +43,10 @@ O projeto utiliza as seguintes bibliotecas do Python:
 ```bash
 python app.py
 ```
+Para facilitar a utilização do programa, ele foi compilado em um arquivo *.exe* (dentro da pasta dist), utilizando a biblioteca pyinstaller
 
 ## 🖥 Uso
 * O programa possui uma interface gráfica simples e intuitiva, desenvolvida em tkinter.
 * Todas as ações podem ser realizadas diretamente pelos botões na interface, sem necessidade de utilizar o terminal.
 * As tarefas são armazenadas em arquivos CSV, garantindo que as informações sejam salvas e possam ser carregadas em futuras execuções.
 * Para fins de acompanhamento, algumas mensagens informativas sobre as ações internas são exibidas no terminal.
-* Para facilitar a utilização do programa, ele foi compilado em um arquivo *.exe* (dentro da pasta dist), utilizando a biblioteca pyinstaller
